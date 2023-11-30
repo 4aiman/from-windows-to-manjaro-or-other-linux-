@@ -150,7 +150,9 @@ sudo make install
 
 
 #"No object for D-Bus interface"
+
 NTFS partitions can be that way even with no errors on them
+
 `systemctl --user restart gvfs-udisks2-volume-monitor`
 
 Also, 
