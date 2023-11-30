@@ -149,7 +149,7 @@ Their support is meh at best, tho
 sudo make install
 
 
-#"No object for D-Bus interface"
+# No object for D-Bus interface
 
 NTFS partitions can be that way even with no errors on them
 
