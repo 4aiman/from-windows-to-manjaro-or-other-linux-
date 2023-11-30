@@ -147,3 +147,15 @@ Else hope that OpenRGB works.
 Their support is meh at best, tho
 
 sudo make install
+
+
+#"No object for D-Bus interface"
+NTFS partitions can be that way even with no errors on them
+`systemctl --user restart gvfs-udisks2-volume-monitor`
+
+Also, 
+- First, go to Dash (for Ubuntu) or run gparted using superuser, preferrably gparted-pkexec.
+- Right click the partition, choose New UUID.
+- Click the Apply button.
+
+Update: Some people claimed that just by having gparted refreshing information, the problems are solved. You should try that first, as refreshing UUID screws up fstab.
