@@ -189,6 +189,16 @@ install `pulse-effects` (pulse) or `easyeffects` (pipewire)
 This helped me: [noise gate + RRNOISE + maximizer.json](files/noise%20gate%20+%20RRNOISE%20+%20maximizer.json)
 
 
+# Clicking scrollbar makes it jump there instead of page up/down
+
+Edit (or create) the file:
+
+~/.config/gtk-3.0/settings.ini
+
+And add the following:
+
+[Settings]
+gtk-primary-button-warps-slider = false
 
 
 .
