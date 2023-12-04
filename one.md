@@ -186,4 +186,9 @@ Experiments are your friends now.
 
 # system-wide noise cancellation
 install `pulse-effects` (pulse) or `easyeffects` (pipewire)
-This helped me: [noise gate + RRNOISE + maximizer.json](files/noise gate + RRNOISE + maximizer.json)
+This helped me: [noise gate + RRNOISE + maximizer.json](files/noise%20gate%20+%20RRNOISE%20+%20maximizer.json)
+
+
+
+
+.
