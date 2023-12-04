@@ -1,14 +1,16 @@
 # build obs from source
 Install:
+```
 linux-headers (I have linux61-headers-6.1.60-1)
 v4l2loopback-dkms (v4l2loopback-dkms-0.12.7-2 for me)
 ninja cmake curl ccache zsh qrcodegencpp-cmake hiredis pkgconf libdatachannel libjuice rav1e-git dav1d-git decklink
-
+```
 Download and unpack CEF (for browse source) + clone and build obs in portable mode:
-clear && cd "$HOME" && rm -rf "$HOME/portable_obs_build_dir" && mkdir -p "$HOME/portable_obs_build_dir/" && cd "$HOME/portable_obs_build_dir" && wget https://cdn-fastly.obsproject.com/downloads/cef_binary_5060_linux64.tar.bz2 && tar -xjf ./cef_binary_5060_linux64.tar.bz2 && git clone https://github.com/obsproject/obs-studio --recursive && cd obs-studio && rm -rf build && rm -rf "$HOME/.config/obs-studio" && rm -rf "$HOME/portable_obs_build_dir/release" && mkdir build && cd build && cmake -DLINUX_PORTABLE=ON -DCMAKE_INSTALL_PREFIX="$HOME/portable_obs_build_dir/release/" -DENABLE_BROWSER=ON -DCEF_ROOT_DIR="../../cef_binary_5060_linux64" -DENABLE_AJA=ON -DTWITCH_HASH=0 -DTWITCH_CLIENTID=selj7uigdty0j5ijt41glcce29ehb4 -DOAUTH_BASE_URL=https://auth.obsproject.com/ -DENABLE_BROWSER_PANELS=ON -DENABLE_DECKLINK=ON -DENABLE_FREETYPE=ON -DENABLE_HEVC=ON -DENABLE_JACK=ON -DENABLE_LIBFDK=ON -DENABLE_NEW_MPEGTS_OUTPUT=ON -DENABLE_PIPEWIRE=ON -DENABLE_PLUGINS=ON -DENABLE_PULSEAUDIO=ON -DENABLE_QSV11=ON -DENABLE_RNNOISE=ON -DENABLE_SCRIPTING=ON -DENABLE_SCRIPTING_LUA=ON -DENABLE_SCRIPTING_PYTHON=ON -DENABLE_SERVICE_UPDATES=ON -DENABLE_SNDIO=ON -DENABLE_SPEEXDSP=ON -DENABLE_UI=ON -DENABLE_V4L2=ON -DENABLE_VLC=ON -DENABLE_VST=ON -DENABLE_WAYLAND=ON -DENABLE_VST_BUNDLED_HEADERS=ON -DENABLE_WEBRTC=ON -DENABLE_WEBSOCKET=ON -DBUILD_TESTS:BOOL="1" -DENABLE_JACK:BOOL="1" -DENABLE_SNDIO:BOOL="1" -DENABLE_RTMPS:STRING="ON" -DCMAKE_BUILD_TYPE:STRING="RelWithDebugInfo" -DCALM_DEPRECATION:BOOL="1" -DENABLE_LIBFDK:BOOL="1" -DENABLE_UDEV=ON .. && make -j12 && make install && cd "$HOME/portable_obs_build_dir/release/bin/64bit/" && ./obs
+
+```clear && cd "$HOME" && rm -rf "$HOME/portable_obs_build_dir" && mkdir -p "$HOME/portable_obs_build_dir/" && cd "$HOME/portable_obs_build_dir" && wget https://cdn-fastly.obsproject.com/downloads/cef_binary_5060_linux64.tar.bz2 && tar -xjf ./cef_binary_5060_linux64.tar.bz2 && git clone https://github.com/obsproject/obs-studio --recursive && cd obs-studio && rm -rf build && rm -rf "$HOME/.config/obs-studio" && rm -rf "$HOME/portable_obs_build_dir/release" && mkdir build && cd build && cmake -DLINUX_PORTABLE=ON -DCMAKE_INSTALL_PREFIX="$HOME/portable_obs_build_dir/release/" -DENABLE_BROWSER=ON -DCEF_ROOT_DIR="../../cef_binary_5060_linux64" -DENABLE_AJA=ON -DTWITCH_HASH=0 -DTWITCH_CLIENTID=selj7uigdty0j5ijt41glcce29ehb4 -DOAUTH_BASE_URL=https://auth.obsproject.com/ -DENABLE_BROWSER_PANELS=ON -DENABLE_DECKLINK=ON -DENABLE_FREETYPE=ON -DENABLE_HEVC=ON -DENABLE_JACK=ON -DENABLE_LIBFDK=ON -DENABLE_NEW_MPEGTS_OUTPUT=ON -DENABLE_PIPEWIRE=ON -DENABLE_PLUGINS=ON -DENABLE_PULSEAUDIO=ON -DENABLE_QSV11=ON -DENABLE_RNNOISE=ON -DENABLE_SCRIPTING=ON -DENABLE_SCRIPTING_LUA=ON -DENABLE_SCRIPTING_PYTHON=ON -DENABLE_SERVICE_UPDATES=ON -DENABLE_SNDIO=ON -DENABLE_SPEEXDSP=ON -DENABLE_UI=ON -DENABLE_V4L2=ON -DENABLE_VLC=ON -DENABLE_VST=ON -DENABLE_WAYLAND=ON -DENABLE_VST_BUNDLED_HEADERS=ON -DENABLE_WEBRTC=ON -DENABLE_WEBSOCKET=ON -DBUILD_TESTS:BOOL="1" -DENABLE_JACK:BOOL="1" -DENABLE_SNDIO:BOOL="1" -DENABLE_RTMPS:STRING="ON" -DCMAKE_BUILD_TYPE:STRING="RelWithDebugInfo" -DCALM_DEPRECATION:BOOL="1" -DENABLE_LIBFDK:BOOL="1" -DENABLE_UDEV=ON .. && make -j12 && make install && cd "$HOME/portable_obs_build_dir/release/bin/64bit/" && ./obs```
 
 Remove libva-vdpau-driver (segfaults obs on load don't know why):
-sudo pamac remove libva-vdpau-driver
+```sudo pamac remove libva-vdpau-driver```
 
 In the end rav1e-git and dav1d-git will probably complain about ffmpeg depending on them, but all three work just fine.
 I've used a combination of pacman, pamac and pamac GUI to install all the needed things, cause none seect one would onlieg and do what I wanted it to do. 
@@ -17,32 +19,33 @@ I've used a combination of pacman, pamac and pamac GUI to install all the needed
 # remove flatpak support
 removing flatpaks from manjaro be like:
 
-$ flatpak list
+`$ flatpak list`
 
 Remove a named app
-$ flatpak uninstall io.lbry.lbry-app
+`$ flatpak uninstall io.lbry.lbry-app`
 
 Uninstall unused flatpaks
-$ flatpak uninstall --unused
+`$ flatpak uninstall --unused`
 
 Uninstalling apps may not remove everything - so how much is left?
-du -ch /var/lib/flatpak
+`du -ch /var/lib/flatpak`
 
 If the total is more than a few MB you may want to cleanup leftovers
-sudo flatpak repair
+`sudo flatpak repair`
 
 Disable flatpak support
-$ sudo nano /etc/pamac.conf
+`$ sudo nano /etc/pamac.conf`
 
 Modify the last lines to look like below and save the changes (you will also find snap support) but as this is about flatpak leave as is.
-  #CheckFlatpakUpdates
+  ```#CheckFlatpakUpdates
   #EnableFlatpak
+```
 
 Then remove flatpak packages using pacman
-$ sudo pacman -Rns flatpak libpamac-flatpak-plugin
+`$ sudo pacman -Rns flatpak libpamac-flatpak-plugin`
 
 Then update your system
-$ sudo pacman -Syu
+`$ sudo pacman -Syu`
 
 Finally restart your system
 
@@ -53,7 +56,7 @@ https://fonts.google.com/noto/specimen/Noto+Color+Emoji
 
 # windows-10/11-like screenshots
 put this into an sh file, and call using a kbd shortcut
-xfce4-screenshooter --region --clipboard --save ~/screenshots/"Screenshot $(date -d "today" +"%d.%m.%y - %H_%M_%S").png"
+```xfce4-screenshooter --region --clipboard --save ~/screenshots/"Screenshot $(date -d "today" +"%d.%m.%y - %H_%M_%S").png"```
 
 
 # fix back/forward button for your mouse in Thunar:
@@ -67,10 +70,10 @@ in my case some fonts were locked as read-only. Just chmod 777 -R . in your ~./f
 
 
 # fix vscode build:
-create writable ~/.cache/yarn/
+`create writable ~/.cache/yarn/`
 
 # am I on x11 or wayland?
-echo $XDG_SESSION_TYPE 
+`echo $XDG_SESSION_TYPE `
 
 
 # build nvidia vfx on Manjaro
