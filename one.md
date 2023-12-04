@@ -161,3 +161,29 @@ Also,
 - Click the Apply button.
 
 Update: Some people claimed that just by having gparted refreshing information, the problems are solved. You should try that first, as refreshing UUID screws up fstab.
+
+
+
+# no scrollbar buttons anywhere!
+fnid your theme in usr/share/themes and search for something like this in main.rc or main.css:
+
+```
+GtkScrollbar::has-backward-stepper = 1 (change value from 0 to 1)
+GtkScrollbar::has-forward-stepper = 1 (change value from 0 to 1)
+```
+
+If you encounter any imports from a resource:// schema, go there in Thunar and search for "stepper" to know what to add.
+
+On gtk2 it looks like described above.
+On gtk3 it looks like this:
+ 
+```
+* { -GtkScrollbar-has-backward-stepper: true; -GtkScrollbar-has-forward-stepper: true; }
+```
+
+Experiments are your friends now.
+
+
+# system-wide noise cancellation
+install `pulse-effects` (pulse) or `easyeffects` (pipewire)
+This helped me: [noise gate + RRNOISE + maximizer.json](files/noise gate + RRNOISE + maximizer.json)
