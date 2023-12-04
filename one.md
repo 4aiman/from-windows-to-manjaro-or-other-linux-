@@ -18,6 +18,30 @@ In the end rav1e-git and dav1d-git will probably complain about ffmpeg depending
 I've used a combination of pacman, pamac and pamac GUI to install all the needed things, cause none seect one would onlieg and do what I wanted it to do. 
 
 
+# Get back the ability to free webcams/capture cards when not in active use
+
+As of 4th of December 2023 OBS on Linux (v 30.0!!!) still has no way to disable v4l2 devices when those are not in active use. <br>
+The most baffling thing is that the patch was made by [julijane](https://github.com/obsproject/obs-studio/pull/3159/files) almost ***four years ago***.
+Insane, right?
+ 
+Anyway, this patch is for OBS 30.0 (more specifically the master branch) and all it does is gets in Julijane's changes.
+Clone OBS, apply the [patch](Add%20deactivate%20button%20to%20v4l2%20devices%20--%20pr#3159%20--%20patch%20for%20OBS%2030.0%20with%20changes%20from%202020%20by%20julijane.patch)
+via git and build. Onec done, you'll have that sweet "Disable when not showing" checkbox you love so much back.
+
+In case you have no idea how to apply patches:
+
+```
+# Switch to the branch where the changes should be applied
+$ git checkout master
+
+# Apply the patch
+$ git am bugfix.patch
+
+# Check what has happened in the commit log
+$ git log 
+```
+
+
 # remove flatpak support
 removing flatpaks from manjaro be like:
 
