@@ -25,7 +25,7 @@ The most baffling thing is that the patch was made by [julijane](https://github.
 Insane, right?
  
 Anyway, this patch is for OBS 30.0 (more specifically the master branch) and all it does is gets in Julijane's changes.
-Clone OBS, apply the [patch](Add%20deactivate%20button%20to%20v4l2%20devices%20--%20pr#3159%20--%20patch%20for%20OBS%2030.0%20with%20changes%20from%202020%20by%20julijane.patch)
+Clone OBS, apply the [patch](files/Add%20deactivate%20button%20to%20v4l2%20devices%20--%20pr%233159%20--%20patch%20for%20OBS%2030.0%20with%20changes%20from%202020%20by%20julijane.patch)
 via git and build. Onec done, you'll have that sweet "Disable when not showing" checkbox you love so much back.
 
 In case you have no idea how to apply patches:
