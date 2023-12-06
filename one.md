@@ -231,3 +231,6 @@ gtk-primary-button-warps-slider = false
 
 
 .
+
+# my controller isn't working in games (but works in menus and/or Steam)
+https://old.reddit.com/r/LinuxCrackSupport/comments/wnt7lh/proper_method_to_get_spiderman_remastered_running/
