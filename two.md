@@ -147,22 +147,25 @@
   ```
 
   Вроде всё! Должно собраться.<br>
-  Если хромиум распакован в `~/cef_binary_6533_linux_x86_64`, то что-то такое должно сработать:
+  Если хромиум распакован в `~/cef_binary_6533_linux_x86_64`, то что-то такое должно сработать, если ничего не поломали в апстриме (а они мастера):
   ```
-  cd "$HOME/portable_obs_build_dir/obs-studio/" && rm -rf build && rm -rf "$HOME/portable_obs_build_dir/release" && mkdir build && cd build && cmake -DLINUX_PORTABLE=ON -DENABLE_PORTABLE_CONFIG=ON -DCMAKE_INSTALL_PREFIX="$HOME/portable_obs_build_dir/release/" -DENABLE_BROWSER=ON -DCEF_ROOT_DIR="../../../cef_binary_6533_linux_x86_64" -DTWITCH_HASH=0 -DTWITCH_CLIENTID=selj7uigdty0j5ijt41glcce29ehb4 -DOAUTH_BASE_URL=https://auth.obsproject.com/ -DENABLE_BROWSER_PANELS=ON -DENABLE_DECKLINK=ON -DENABLE_FREETYPE=ON -DENABLE_HEVC=ON -DENABLE_JACK=ON -DENABLE_LIBFDK=ON -DENABLE_NEW_MPEGTS_OUTPUT=ON -DENABLE_PLUGINS=ON -DENABLE_PULSEAUDIO=ON -DENABLE_RNNOISE=ON -DENABLE_SCRIPTING=ON -DENABLE_SCRIPTING_LUA=ON -DENABLE_SCRIPTING_PYTHON=ON -DENABLE_SERVICE_UPDATES=ON -DENABLE_SNDIO=ON -DENABLE_SPEEXDSP=ON -DENABLE_UI=ON -DENABLE_V4L2=ON -DENABLE_VLC=ON -DENABLE_VST=ON -DENABLE_WAYLAND=ON -DENABLE_VST_BUNDLED_HEADERS=ON -DENABLE_WEBRTC=ON -DENABLE_WEBSOCKET=ON -DBUILD_TESTS:BOOL="1" -DENABLE_JACK:BOOL="1" -DENABLE_SNDIO:BOOL="1" -DENABLE_RTMPS:STRING="ON" -DCMAKE_BUILD_TYPE:STRING="RelWithDebugInfo" -DCALM_DEPRECATION:BOOL="1" -DENABLE_LIBFDK:BOOL="1" -DENABLE_UDEV=ON .. && make -j12 && cd "$HOME/portable_obs_build_dir/obs-studio/build/UI" && ./obs
+  cd ~/portable_obs_build_dir/obs-studio/ && rm -rf build && rm -rf "$HOME/portable_obs_build_dir/release" && mkdir build && cd build && cmake -DLINUX_PORTABLE=ON -DENABLE_PORTABLE_CONFIG=ON -DCMAKE_INSTALL_PREFIX="$HOME/portable_obs_build_dir/release/" -DENABLE_BROWSER=ON -DCEF_ROOT_DIR="../../../cef_binary_6533_linux_x86_64" -DTWITCH_HASH=0 -DTWITCH_CLIENTID=selj7uigdty0j5ijt41glcce29ehb4 -DOAUTH_BASE_URL=https://auth.obsproject.com/ -DENABLE_BROWSER_PANELS=ON -DENABLE_DECKLINK=ON -DENABLE_FREETYPE=ON -DENABLE_HEVC=ON -DENABLE_JACK=ON -DENABLE_LIBFDK=ON -DENABLE_NEW_MPEGTS_OUTPUT=ON -DENABLE_PLUGINS=ON -DENABLE_PULSEAUDIO=ON -DENABLE_RNNOISE=ON -DENABLE_SCRIPTING=ON -DENABLE_SCRIPTING_LUA=ON -DENABLE_SCRIPTING_PYTHON=ON -DENABLE_SERVICE_UPDATES=ON -DENABLE_SNDIO=ON -DENABLE_SPEEXDSP=ON -DENABLE_UI=ON -DENABLE_V4L2=ON -DENABLE_VLC=ON -DENABLE_VST=ON -DENABLE_WAYLAND=ON -DENABLE_VST_BUNDLED_HEADERS=ON -DENABLE_WEBRTC=ON -DENABLE_WEBSOCKET=ON -DBUILD_TESTS:BOOL="1" -DENABLE_JACK:BOOL="1" -DENABLE_SNDIO:BOOL="1" -DENABLE_RTMPS:STRING="ON" -DCMAKE_BUILD_TYPE:STRING="RelWithDebugInfo" -DCALM_DEPRECATION:BOOL="1" -DENABLE_LIBFDK:BOOL="1" -DENABLE_UDEV=ON .. && make -j12 && make install && mkdir -p ~/portable_obs_build_dir/release/lib/x86_64-linux-gnu  && cp ~/portable_obs_build_dir/release/lib/obs-scripting ~/portable_obs_build_dir/release/lib/x86_64-linux-gnu/ -r && cd "$HOME/portable_obs_build_dir/release/bin/" && ./obs
+
   ```
 
-  ~~Не ссыте, систему не запорет (если все те пакеты и драйверы выще не запороли) - сборка портабельная.~~
+  Не ссыте, систему не запорет (если все те пакеты и драйверы выще не запороли) - сборка портабельная.
 
   От сборки на арче/манжаро отличается тем, что бинарник один (а может это 31ая версия ОБс подосрала), так что нет больше в папке `bin` папки `64bit`. 
 
   Если собралось и запустилось - значит работает. Значит, можно, наконец-то, патчить камеру.<br>
 
-  ***Не забываем удалить обс, поставленный из пакета "до того как"!***
+  ***Не забываем удалить обс, поставленный из пакета "до того как"!***<br>
   (Нет, можно, конечно, и оставить, но потом не спрашивайте, почему патч не работает.)
     
   Патч из one всё ещё может быть применён вручную, но не работает из коробки.
   Вот вам для версии 31 от 28.12.2024 (ветка мастер) [webcam.patch](files/webcam.patch)
+
+  А вообще, текущая версия не находит то луа, то либу фронта. Даже есть делать непортабельную сборку. 
   
   
   
