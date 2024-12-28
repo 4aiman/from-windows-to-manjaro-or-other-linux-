@@ -88,4 +88,97 @@
 - ### StreamFX ушёл ~~в зад~~ на патреон
   Сырцы забрал с собой. Есть форки и счастливчики, которые успели успели собрать v30 "до того как".
   Сборка Manjaro, которую я делал год назад не работает на современной бубунте.
+
+- ### OBS всё так же держит камеру...
+  Ну что, пиздос, конечно.<br>
+  Берём исходники обс и собираем - примерно как написано в [one.md](one.md)<br>
+
+  Проблема в том, что на убунте нет aur'а и придётся ставить руками ебучую AJA, libdatachannel,  и т.п.
+  Проще гуглить, но вот что-то:
+  - заголовки под ядро:
+  ```  
+  sudo apt install -y linux-headers-$(uname -r) linux-tools-$(uname -r)
+  ```
+  - туева хуча зависимостей (удивительно, как это не сломало цитрамор и не привело к удалению нужных пакетов):  
+  ```
+  sudo apt install cmake ninja-build pkg-config clang clang-format build-essential curl ccache git zsh libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavutil-dev libswresample-dev libswscale-dev libx264-dev libcurl4-openssl-dev libmbedtls-dev libgl1-mesa-dev libjansson-dev libluajit-5.1-dev python3-dev libx11-dev libxcb-randr0-dev libxcb-shm0-dev libxcb-xinerama0-dev libxcb-composite0-dev libxcomposite-dev libxinerama-dev libxcb1-dev libx11-xcb-dev libxcb-xfixes0-dev swig libcmocka-dev libxss-dev libglvnd-dev libgles2-mesa-dev libwayland-dev librist-dev libsrt-openssl-dev libpci-dev libpipewire-0.3-dev libqrcodegencpp-dev uthash-dev qt6-base-dev qt6-base-private-dev qt6-svg-dev qt6-wayland qt6-image-formats-plugins libasound2-dev libfdk-aac-dev libfontconfig-dev libfreetype6-dev libjack-jackd2-dev libpulse-dev libsndio-dev libspeexdsp-dev libudev-dev libv4l-dev libva-dev libvlc-dev libvpl-dev libdrm-dev nlohmann-json3-dev libwebsocketpp-dev libasio-dev libxcb-xinput-dev libffmpeg-nvenc-dev libsndfile1-dev libsoxr-dev libsox-dev
+  ```
+  Если тут не всё или что-то отсутствует - идите в жопу 😉
+
+  Ещё понадобится хромиум без башки отсюда https://cdn-fastly.obsproject.com/downloads/cef_binary_6533_linux_x86_64.tar.xz. Распаковать через `tar -xvf` не получится, но у вас есть энгрампа, файл-роллер или фар2л. Если нет - печаль.
+
+  Аджа сама не ставится, надо собирать.
+  ```
+  cd ~
+  git clone https://github.com/aja-video/libajantv2
+  cd libajantv2
+  cmake -S . -B build
+  cmake --build build
+  cd driver/linux
+  make clean && make -j12
+  sudo make install  
+  ```
+  Чтобы не перезагружать, сразу херачим модуль в ядро
+  ```
+  sudo insmod ajantv2.ko
+  ```
+  Но всё-таки через DKMS ставим в систему
+  ```
+  make dkms-install
+  ```
+
+  DataChannel тже не ставится из пакетов
+  ```
+  cd ~
+  git clone https://github.com/paullouisageneau/libdatachannel.git
+  git submodule update --init --recursive --depth 1
+  cmake -B build -DUSE_GNUTLS=0 -DUSE_NICE=0 -DCMAKE_BUILD_TYPE=Release
+  cd build
+  make -j12
+  sudo make install
+  ```
+  RNNoise
+  ```
+  cd ~
+  git clone https://github.com/sysprog21/rnnoise
+  cd rnnoise
+  make -j12
+  sudo make install
+  ```
+
+  Вроде всё! Должно собраться.<br>
+  Если хромиум распакован в `~/cef_binary_6533_linux_x86_64`, то что-то такое должно сработать:
+  ```
+  cd ~/portable_obs_build_dir/obs-studio/ && rm -rf build && rm -rf "$HOME/portable_obs_build_dir/release" && mkdir build && cd build && cmake -DLINUX_PORTABLE=ON -DCMAKE_INSTALL_PREFIX="$HOME/portable_obs_build_dir/release/" -DENABLE_BROWSER=ON -DCEF_ROOT_DIR="../../../cef_binary_6533_linux_x86_64" -DTWITCH_HASH=0 -DTWITCH_CLIENTID=selj7uigdty0j5ijt41glcce29ehb4 -DOAUTH_BASE_URL=https://auth.obsproject.com/ -DENABLE_BROWSER_PANELS=ON -DENABLE_DECKLINK=ON -DENABLE_FREETYPE=ON -DENABLE_HEVC=ON -DENABLE_JACK=ON -DENABLE_LIBFDK=ON -DENABLE_NEW_MPEGTS_OUTPUT=ON -DENABLE_PLUGINS=ON -DENABLE_PULSEAUDIO=ON -DENABLE_RNNOISE=ON -DENABLE_SCRIPTING=ON -DENABLE_SCRIPTING_LUA=ON -DENABLE_SCRIPTING_PYTHON=ON -DENABLE_SERVICE_UPDATES=ON -DENABLE_SNDIO=ON -DENABLE_SPEEXDSP=ON -DENABLE_UI=ON -DENABLE_V4L2=ON -DENABLE_VLC=ON -DENABLE_VST=ON -DENABLE_WAYLAND=ON -DENABLE_VST_BUNDLED_HEADERS=ON -DENABLE_WEBRTC=ON -DENABLE_WEBSOCKET=ON -DBUILD_TESTS:BOOL="1" -DENABLE_JACK:BOOL="1" -DENABLE_SNDIO:BOOL="1" -DENABLE_RTMPS:STRING="ON" -DCMAKE_BUILD_TYPE:STRING="RelWithDebugInfo" -DCALM_DEPRECATION:BOOL="1" -DENABLE_LIBFDK:BOOL="1" -DENABLE_UDEV=ON .. && make -j12 && make install && mkdir -p ~/portable_obs_build_dir/release/lib/x86_64-linux-gnu  && cp ~/portable_obs_build_dir/release/lib/obs-scripting ~/portable_obs_build_dir/release/lib/x86_64-linux-gnu/ -r && cd "$HOME/portable_obs_build_dir/release/bin/" && ./obs
+
+  ```
+  Не ссыте, систему не запорет (если все те пакеты и драйверы выще не запороли) - сборка портабельная.
+
+  От сборки на арче/манжаро отличается тем, что бинарник один (а может это 31ая версия ОБс подосрала), так что нет больше в папке `bin` папки `64bit`. 
+
+  Если собралось и запустилось - значит работает. Значит, можно, наконец-то, патчить камеру.<br>
+
+  *У меня не завелось, потому что не было `obs-lua`*.<br>
+  Поставил luajit и пересобрал. Чего и вам советую - ***читать***, что тут написано. Мало ли какие команды я вам подсунул выше?
+
+  Кстати, тоже не помогло. Попробовал `sudo apt install lua-posix`. Почему? Потому что гугл, dood.<br>
+  Кстати, и это тоже не помогло. Попробовал `sudo apt install lua5.1`. Всё "по тому" же.<br>
+  Да, я издеваюсь. Зато честно и от всей души.
+
+  Сама библиотека собралась, но почему-то не грузится из `portable_obs_build_dir/release/lib/obs-scripting`.<br>
+  Раньше таких косяков не было. Я просто скопировал `portable_obs_build_dir/release/lib/obs-scripting` в `portable_obs_build_dir/release/lib/x86_64-linux-gnu/obs-scripting`. LD_PATH не помог, в команде выше шаг с копированием учтён. Хотите делать симлинки - флаг вам в руки, барабан на шею, и вперёд! За товарищем Лениным и другими друзьями пионеров! Вперёд!
+  
+  В общем, завелось, но течёт `info: Number of memory leaks: 66`.<br>
+  У меня куча левых плагинов в системе, так что моэет это они. Главное, что можно патчить.
+
+  Патч из one всё ещё может быть применён вручную, но не работает...
+  
+  
+  
+  
+  
+  
+
+  
+  
   
