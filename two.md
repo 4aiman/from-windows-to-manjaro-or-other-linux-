@@ -194,11 +194,19 @@
   Comment[ru_RU]=Свободное и открытое ПО для потокового вещания и видеозаписи
   ```
   
-  
-  
-  
-  
+- ### Нерабочий Electron
+  Даже если чистить пакеты nodejs, электрон не стартует, выдавая
+  ```
+  The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now.
+  ```
+  А проблема в AppArmor. В каноникле решили поиздеваться и порезать права CEF на уровне ядра.<br>
+  Чинится снятием тех ограничений, которые ввела убунта для AppImage'ей:
+  ```
+  sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+  ```
+  На всякий случай, можно вернуть всё "взад", поставив единицу:
+  ```
+   sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=1
+  ``` 
 
-  
-  
   
