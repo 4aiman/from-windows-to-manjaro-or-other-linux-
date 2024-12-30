@@ -209,4 +209,10 @@
    sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=1
   ``` 
 
+- ### Не монтируютя NTFS (выборочно)
+  Криво выключили машину.
+  Если из-под рута монтируется нахрапом, то можно попробовать отключить драйвер ядра ntfs вот так:
+  ```
+  sudo bash -c 'echo "blacklist ntfs3" > /etc/modprobe.d/disable-ntfs3.conf'  
+  ```
   
