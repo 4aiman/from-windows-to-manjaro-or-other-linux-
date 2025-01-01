@@ -216,3 +216,5 @@
   sudo bash -c 'echo "blacklist ntfs3" > /etc/modprobe.d/disable-ntfs3.conf'  
   ```
   
+- ### Наставил говна и всё поломал?
+  grep " install " /var/log/dpkg.log
