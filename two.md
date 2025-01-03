@@ -194,7 +194,7 @@
   Comment[ru_RU]=Свободное и открытое ПО для потокового вещания и видеозаписи
   ```
 - ### А можно OBS уже с патчем?
-  [Репозиторий](https://github.com/4aiman/obs-studio.git)
+  [Репозиторий](https://github.com/4aiman/obs-studio.git) <br>
   [Сборка](https://github.com/4aiman/obs-studio/actions/runs/12528447589/artifacts/2368103516)
   
 - ### Нерабочий Electron
@@ -273,4 +273,9 @@
 - ### В Firefox пропали диалоги для открытия и сохранения файлов.
   Удаляем назхрен snap и ставим нормальный deb пакет из репы с оф. сайта мозиллы
   https://support.mozilla.org/en-US/kb/install-firefox-linux
-  
+
+- ### pulse начал "заикаться" (crackle)
+  Похоже на постоянное прерывание звука в эмуляторе, когда тот не справляется, только по всей системе и даже когда нагрузки нет.
+
+  1. Удаляем `speech-dispatcher` (убъёт TTS, в т.ч. конченный e-speaak и нормальный festvox)
+  2. Копируем файл [default.pa](files/default.pa) по этому пути `/etc/pulse/default.pa` ([первоисточник](https://pastebin.com/raw/EJ2qvZvA), [вопрос на SO](https://askubuntu.com/questions/225444/how-to-make-pulseaudio-work-again) )
