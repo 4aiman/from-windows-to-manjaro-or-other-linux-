@@ -268,4 +268,5 @@
 
 - ### В Firefox пропали диалоги для открытия и сохранения файлов.
   Удаляем назхрен snap и ставим нормальный deb пакет из репы с оф. сайта мозиллы
+  https://support.mozilla.org/en-US/kb/install-firefox-linux
   
