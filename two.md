@@ -13,6 +13,11 @@
   А нерабочая иконка - от iBus 1.5.29-rc2. Зачем оно там, если не работает - хз, но проблема общая для Deepin и Bazzit.
   Скорее всего разрабы тупо используют английский как единственный язык. FT.
 
+- ### иконки для .exe файлов
+  ```
+  sudo ap install icoextract-thumbnailer
+  ```
+
 - ### Опять скриншоты, теперь в Cinnamon 
 
     Во-первых, это говно всё равно юзает gnome-screenshot, несмотря на "свою" DE.<br>
@@ -279,3 +284,4 @@
 
   1. Удаляем `speech-dispatcher` (убъёт TTS, в т.ч. конченный e-speaak и нормальный festvox)
   2. Копируем файл [default.pa](files/default.pa) по этому пути `/etc/pulse/default.pa` ([первоисточник](https://pastebin.com/raw/EJ2qvZvA), [вопрос на SO](https://askubuntu.com/questions/225444/how-to-make-pulseaudio-work-again) )
+
