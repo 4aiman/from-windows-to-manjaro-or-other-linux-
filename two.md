@@ -285,3 +285,10 @@
   1. Удаляем `speech-dispatcher` (убъёт TTS, в т.ч. конченный e-speaak и нормальный festvox)
   2. Копируем файл [default.pa](files/default.pa) по этому пути `/etc/pulse/default.pa` ([первоисточник](https://pastebin.com/raw/EJ2qvZvA), [вопрос на SO](https://askubuntu.com/questions/225444/how-to-make-pulseaudio-work-again) )
 
+- ### не отключается заголовок у Firefox и VS-Codium
+  1. Нужно удалить пакет который отключает `client-side borders gtk3+`. 
+  2. Для огнелиса использовать стандартную настройку (ПКМ на закладках или месте с иконками расширений + "Настройка панели инструментов")
+     ![изображение](https://github.com/user-attachments/assets/88192917-86b5-49db-aae4-5e5cf83ab34f)
+  4. для кодиума перейти в настройки `File` -> `Preferences` -> `Settings` и поменять там пару параметров как на скрине:
+     ![изображение](https://github.com/user-attachments/assets/8273ac69-2262-415e-a266-06b31438e71a)
+
