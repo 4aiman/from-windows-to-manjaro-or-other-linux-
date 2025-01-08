@@ -294,7 +294,7 @@
      ![изображение](https://github.com/user-attachments/assets/8273ac69-2262-415e-a266-06b31438e71a)
 
 
-- ### electron пеерстал сохранять позицию окна (или нреагировать на неё
+- ### electron пеерстал сохранять позицию окна (или не реагирует на неё)
   https://github.com/electron/electron/issues/526
   ```
     mainWindow.setBounds({
@@ -303,3 +303,11 @@
 	  x: 2060,
 	  y: 0})
   ```
+
+- ### Расширения cinnamon не работают после перезагрузки
+  Нужно поменять список расширений
+
+  1. заглянуть в `~/.local/share/cinnamon/extensions/`
+  2. найти там `metadata.json` и посмотреть uuid
+  3. поправить список uuid'шников в dconf по пути `/org/cinnamon/enabled-extensions`
+  ![изображение](https://github.com/user-attachments/assets/2c9f465c-f34b-49bd-95f8-b6378eb346d0)
