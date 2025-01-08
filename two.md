@@ -311,3 +311,15 @@
   2. найти там `metadata.json` и посмотреть uuid
   3. поправить список uuid'шников в dconf по пути `/org/cinnamon/enabled-extensions`
   ![изображение](https://github.com/user-attachments/assets/2c9f465c-f34b-49bd-95f8-b6378eb346d0)
+
+- ### Ya.Disk на линуксах в 2025
+  - ```
+    sudo apt install rclone
+    rclone config
+    ```
+  - Выбрать 43 (яндекс)
+  - пропустить вопросы про `client_id` и `client_secret`
+  - дополнительно ничего не редактировать, согласиться на значения по-умолчанию
+  - смонтировать куда-нибудь `rclone mount yandexdisk: $HOME/YaDisk --daemon`
+  - пока хз как оно синхронизирует, но, похоже, не автоматом
+  
