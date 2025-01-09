@@ -326,3 +326,9 @@
 - ### архиватор не спрашивает пароля у 7z
   Скачай подмени бинарник engrampa в /bin: https://ftp5.gwdg.de/pub/linux/archlinux/extra/os/x86_64/engrampa-1.28.2-2-x86_64.pkg.tar.zst
   
+- ### Яндекс.Диск
+  https://yandex.ru/support/yandex-360/customers/disk/desktop/linux/ru/installation + https://launchpad.net/~slytomcat/+archive/ubuntu/ppa
+
+  Ставил deb (без репы) и настраиваем через консоль - попросит открыть страницу устройств в браузере, где уже есть авторизация яндекса и ввести там код в течении 5 минут 
+  ![Screenshot_09 01 25 - 18_18_05](https://github.com/user-attachments/assets/863457f3-8029-4e84-9877-ea7d6c163a72)
+  
