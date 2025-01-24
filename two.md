@@ -435,5 +435,22 @@
   Локализации нет, ну и хер с ней.
   ![изображение](https://github.com/user-attachments/assets/274a282c-9050-4297-8987-bf14a4f42825)
 
+- ### Нет заголовков для libsdl2
+  ХЗ как так, но libsdl2-dev зависит от lib-decor-0. Сам декор ставится нормально, но libsdl2-dev всё равно ломается из-за libgbm1.
+
+  *** НЕ ДАЙ ГРАБЛИ *** ВАМ УДАЛИТЬ ПРОБЛЕМНЫЙ libgbm1 через какой-нибудь `sudo dpkg --force-all -P libgbm1`!!!
+
+  Сломается хром, кодиум, стим, вэйлэнд (и половина гуя, включая цитрамон, если попытаетесь решить всё через пакетный менеджер).
+
+  Помогает установка sdl2 из сырцов.
+  ```
+  git clone https://git.launchpad.net/ubuntu/+source/libsdl2
+  cd libsdl2
+  ./autogem.sh
+  ./configure
+  make -j12
+  sudo make install
+  ```
+  Если libgbm1 всё-таки потёрли, то возьмите из реп убуинты что-то типа `libgbm1_24.0.9-0ubuntu0.3_amd64.deb`
   
-  
+
