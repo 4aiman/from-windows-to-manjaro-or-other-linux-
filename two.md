@@ -474,5 +474,7 @@
   Если не получилось - скачаннго файла не будет, `version.txt` не обновится, дискорд запустится старый (текущей версии).
 
   Как добавить в автозагрузку - личное дело каждого.
-  
+
+- ### локальная почта с TLS
+  https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-ubuntu-20-04 
   
