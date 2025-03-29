@@ -484,4 +484,11 @@
 
 - ### локальная почта с TLS
   https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-ubuntu-20-04 
-  
+
+- ### фризы и дёрганье в играх
+
+   1. качаем dxvk и кладём в папку с игрой https://github.com/doitsujin/dxvk/releases
+   2. Идём в настройки нвидии и ставим принудительные галки:
+      ![изображение](https://github.com/user-attachments/assets/0c09b600-19e3-425c-ac87-094697e82f39)
+
+      
