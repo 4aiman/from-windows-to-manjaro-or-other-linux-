@@ -110,7 +110,7 @@
   sudo apt install cmake ninja-build pkg-config clang clang-format build-essential curl ccache git zsh libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavutil-dev libswresample-dev libswscale-dev libx264-dev libcurl4-openssl-dev libmbedtls-dev libgl1-mesa-dev libjansson-dev libluajit-5.1-dev python3-dev libx11-dev libxcb-randr0-dev libxcb-shm0-dev libxcb-xinerama0-dev libxcb-composite0-dev libxcomposite-dev libxinerama-dev libxcb1-dev libx11-xcb-dev libxcb-xfixes0-dev swig libcmocka-dev libxss-dev libglvnd-dev libgles2-mesa-dev libwayland-dev librist-dev libsrt-openssl-dev libpci-dev libpipewire-0.3-dev libqrcodegencpp-dev uthash-dev qt6-base-dev qt6-base-private-dev qt6-svg-dev qt6-wayland qt6-image-formats-plugins libasound2-dev libfdk-aac-dev libfontconfig-dev libfreetype6-dev libjack-jackd2-dev libpulse-dev libsndio-dev libspeexdsp-dev libudev-dev libv4l-dev libva-dev libvlc-dev libvpl-dev libdrm-dev nlohmann-json3-dev libwebsocketpp-dev libasio-dev libxcb-xinput-dev libffmpeg-nvenc-dev libsndfile1-dev libsoxr-dev libsox-dev
   ```
 
-  Если ругается на `libfreetype6-dev`, ставьте просто `ibfreetype-dev`; а если не наход ффмпег, то проверяйте `ffmpeg -v`. Если оно 6.1, то смело удалите требования к версии в сборочных файлах (просто стираем выделенное).
+  Если ругается на `libfreetype6-dev`, ставьте просто `ibfreetype-dev`; а если не находит ффмпег, то проверяйте `ffmpeg -v`. Если оно 6.1, то смело удалите требования к версии в сборочных файлах (просто стираем выделенное).
   
   ![изображение](https://github.com/user-attachments/assets/0b45a89b-d194-4de4-9052-1a4dbe8628b0)
 
@@ -140,7 +140,7 @@
   make dkms-install
   ```
 
-  DataChannel тже не ставится из пакетов
+  DataChannel тоже не ставится из пакетов
   ```
   cd ~
   git clone https://github.com/paullouisageneau/libdatachannel.git
@@ -170,9 +170,9 @@
   cd ~/portable_obs_build_dir/obs-studio/ && rm -rf build && rm -rf "$HOME/portable_obs_build_dir/release" && mkdir build && cd build && cmake -DLINUX_PORTABLE=ON -DENABLE_PORTABLE_CONFIG=ON -DCMAKE_INSTALL_PREFIX="$HOME/portable_obs_build_dir/release/" -DENABLE_BROWSER=ON -DCEF_ROOT_DIR="../../../cef_binary_6533_linux_x86_64" -DTWITCH_HASH=0 -DTWITCH_CLIENTID=selj7uigdty0j5ijt41glcce29ehb4 -DOAUTH_BASE_URL=https://auth.obsproject.com/ -DENABLE_BROWSER_PANELS=ON -DENABLE_DECKLINK=ON -DENABLE_FREETYPE=ON -DENABLE_HEVC=ON -DENABLE_JACK=ON -DENABLE_LIBFDK=ON -DENABLE_NEW_MPEGTS_OUTPUT=ON -DENABLE_PLUGINS=ON -DENABLE_PULSEAUDIO=ON -DENABLE_RNNOISE=ON -DENABLE_SCRIPTING=ON -DENABLE_SCRIPTING_LUA=ON -DENABLE_SCRIPTING_PYTHON=ON -DENABLE_SERVICE_UPDATES=ON -DENABLE_SNDIO=ON -DENABLE_SPEEXDSP=ON -DENABLE_UI=ON -DENABLE_V4L2=ON -DENABLE_VLC=ON -DENABLE_VST=ON -DENABLE_WAYLAND=ON -DENABLE_VST_BUNDLED_HEADERS=ON -DENABLE_WEBRTC=ON -DENABLE_WEBSOCKET=ON -DBUILD_TESTS:BOOL="1" -DENABLE_JACK:BOOL="1" -DENABLE_SNDIO:BOOL="1" -DENABLE_RTMPS:STRING="ON" -DCMAKE_BUILD_TYPE:STRING="RelWithDebugInfo" -DCALM_DEPRECATION:BOOL="1" -DENABLE_LIBFDK:BOOL="1" -DENABLE_UDEV=ON .. && make -j12 && make install && mkdir -p ~/portable_obs_build_dir/release/lib/x86_64-linux-gnu  && cp ~/portable_obs_build_dir/release/lib/obs-scripting ~/portable_obs_build_dir/release/lib/x86_64-linux-gnu/ -r && cd "$HOME/portable_obs_build_dir/release/bin/" && ./obs
   ```
 
-  Не ссыте, систему не запорет (если все те пакеты и драйверы выще не запороли) - сборка портабельная.
+  Не ссыте, систему не запорет (если все те пакеты и драйверы выше не запороли) - сборка портабельная.
 
-  От сборки на арче/манжаро отличается тем, что бинарник один (а может это 31ая версия ОБс подосрала), так что нет больше в папке `bin` папки `64bit`. 
+  От сборки на арче/манжаро отличается тем, что бинарник один (а может это 31ая версия ОБС подосрала), так что нет больше в папке `bin` папки `64bit`. 
 
   Если собралось и запустилось - значит работает. Значит, можно, наконец-то, патчить камеру.<br>
 
