@@ -462,21 +462,9 @@
   
 - ### Задолбали обновления дискорда
 
-  Я решил вопрос скриптом
-  ```
-  cd "$HOME/dev/discord_updater/"
-  discord_version=`cat version.txt`
-  new_discord_version=$((discord_version + 1))
-  wget "https://stable.dl2.discordapp.net/apps/linux/0.0.$new_discord_version/discord-0.0.$new_discord_version.tar.gz"
-  if [ -f "discord-0.0.$new_discord_version.tar.gz" ]; then
-      rm -rf "Discord"
-      tar -xvf "discord-0.0.$new_discord_version.tar.gz" 
-      cp -r -T "Discord" "$HOME/Рабочий стол/Apps/Discord"
-      echo $new_discord_version > version.txt    
-  fi
-  "$HOME/Рабочий стол/Apps/Discord/Discord"
-  ```
-  Скрипт берёт текущую версию дискорда из файла `version.txt` (на момент написания 83), добавляет 1, и пытается скачать обновку.<br>
+  Я решил вопрос [скриптом](https://github.com/4aiman/discord_updater)
+
+  Скрипт берёт текущую версию дискорда из файла `version.txt` (на момент написания 93), добавляет 1, и пытается скачать обновку.<br>
   Если получилось - обновка распаковывается и копируется с заменой на место предыдущей.<br>
   Если не получилось - скачаннго файла не будет, `version.txt` не обновится, дискорд запустится старый (текущей версии).
 
