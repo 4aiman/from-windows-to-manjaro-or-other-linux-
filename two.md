@@ -480,9 +480,16 @@
   https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-ubuntu-20-04 
 
 - ### фризы и дёрганье в играх
-
    1. качаем dxvk и кладём в папку с игрой https://github.com/doitsujin/dxvk/releases
    2. Идём в настройки нвидии и ставим принудительные галки:
       ![изображение](https://github.com/user-attachments/assets/0c09b600-19e3-425c-ac87-094697e82f39)
 
+- ### расшифровка токенов
+  По долгу службы приходится иметь с этим дело.<br>
+  Решение - закинуть команду ниже в текстовый файл, дать права на выполнение, и просто дёргать `путь/tokendecode TOKEN`
+  ```
+  jq -R 'split(".") | .[1] | @base64d | fromjson | {iat: .iat | todate, exp: .exp | todate, nbf: .nbf | todate, auth_time: .auth_time | todate} + (del(.iat, .exp, .nbf, .auth_time) | .)' <<< $1
+  ```
+  Конвертит JWT в джейсон + форматит даты в нормальный вид из штмапов.
+  
       
