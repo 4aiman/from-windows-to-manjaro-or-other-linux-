@@ -488,8 +488,25 @@
   По долгу службы приходится иметь с этим дело.<br>
   Решение - закинуть команду ниже в текстовый файл, дать права на выполнение, и просто дёргать `путь/tokendecode TOKEN`
   ```
-  jq -R 'split(".") | .[1] | @base64d | fromjson | {iat: .iat | todate, exp: .exp | todate, nbf: .nbf | todate, auth_time: .auth_time | todate} + (del(.iat, .exp, .nbf, .auth_time) | .)' <<< $1
+  jq -R 'split(".") | .[1] | @base64d | fromjson | 
+    . as $original | 
+    { 
+        iat: (try ($original.iat | todate) // null), 
+        exp: (try ($original.exp | todate) // null), 
+        nbf: (try ($original.nbf | todate) // null), 
+        auth_time: (try ($original.auth_time | todate) // null) 
+    } + ($original | del(.iat, .exp, .nbf, .auth_time))' <<< "$1"
   ```
   Конвертит JWT в джейсон + форматит даты в нормальный вид из штмапов.
   
-      
+- ### Кривой курсор в телеге ни с того ни с сего.
+
+  Выглядит сие убожество так:<br>
+  ![изображение](https://github.com/user-attachments/assets/e438a280-02f3-488e-84be-61df72a78489)
+
+  Мне помогло создание скрипта для запуска с вот таким экспортом перед вызовом телеги:
+ ```
+ export XCURSOR_PATH=$RUNTIME/usr/share/icons
+ ```
+ Кроме того, телега сама добавляется в автозапуск *напрямую*, так что придётся её оттуда убрать и поместить в автозагрузку вручную написанный скрипт
+ 
