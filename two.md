@@ -524,3 +524,12 @@
 - ### Починить симлинки после перемещения папки
   
   `find . -type l -exec sh -c 'lnk="{}"; target="$(readlink '{}' | sed 's#/ОТКУДА#/КУДА#')"; unlink "${lnk}"; ln -s "${target}" "${lnk}" ' \;`
+
+- ### cargo can't fetch a file that's accessible https://index.crates.io/ta/ur/tauri-plugin-dialog
+
+  https://github.com/rust-lang/cargo/issues/13457#issuecomment-2012259159
+
+  > If someone is still going through this issue on Windows, please try by adding registries.crates-io.protocol = "git" to /.cargo/config.toml. It worked for me.
+  
+  YES, it's EMPTY by default.
+  
