@@ -533,3 +533,6 @@
   
   YES, it's EMPTY by default.
   
+- ### долюанный экран вырубает, хоть и сказано НЕ выубаться
+
+  https://wiki.archlinux.org/title/Display_Power_Management_Signaling
