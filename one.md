@@ -169,6 +169,7 @@ make ~.nvidia-settings-rc read-only
 - in goverlay:
     - disable vsync
     - set framecap to match your monitor
+    - remove/apply dxvk
 
 #nvidia led 
 install that shit if you have nvidia LOGO on your GPU.
