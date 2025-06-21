@@ -491,7 +491,9 @@
    5. Ставим low-latency ядро для nvidia + общие модули (смотри по номеру рядом со словом nvidia)
       ![изображение](https://github.com/user-attachments/assets/ea196760-4d04-4004-a527-9a81dfc42dc6)
    6. Удаляем апплет погоды
-   7. ВСЁ РАВНО ИМЕЕМ ФРИЗЫ!!!   
+   7. ВСЁ РАВНО ИМЕЕМ ФРИЗЫ!!!
+   8. Сносим цитрамон, ставим xfce - не помогает
+   9. удаляем dxvk из папки с игрой + отключаем VSYNC - О ЧУДО!!!-
 
 
 - ### расшифровка токенов
@@ -542,14 +544,15 @@
 
 - ### Не играют видосы в играх Ys I, II, IV, VI
 
-  1. Ставим gstreamer плагины для 32х
-  2. Удаляем gstreamer-vaapi
-  ```
+  1. Ставим gstreamer плагины для 32х  
+    ```
 	sudo apt install gstreamer1.0-libav:i386
 	sudo apt install gstreamer1.0-plugins-bad:i386
 	sudo apt install gstreamer1.0-plugins-base:i386
 	sudo apt install gstreamer1.0-plugins-good:i386
-  ```
+    ```
+  2. Удаляем gstreamer-vaapi
+  3. ставим CCCPack кодеков
   
   
 
