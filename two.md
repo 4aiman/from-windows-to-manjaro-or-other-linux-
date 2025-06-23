@@ -554,6 +554,7 @@
   2. Удаляем gstreamer-vaapi
   3. ставим CCCPack кодеков
   
+- ### emoji xfce
   
-
-
+  https://github.com/efck-chat-keyboard/efck/releases
+  
