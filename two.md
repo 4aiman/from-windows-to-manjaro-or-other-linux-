@@ -558,3 +558,59 @@
   
   https://github.com/efck-chat-keyboard/efck/releases
   
+- ### Система теряет аудиокарту (usb) при запуске и если долго нет звука
+
+  Симптомы:
+    - звук воспроизводится только на других картах
+    - звук воспроизводится только если выключен микрофон (аналоговое стерео, вместо стерео + микрофон)
+    - не грузится ютуб и вообще любые видео и аудио (грузятся, просто не могут воспроизвестись
+    - `journalctl --user-unit=pulseaudio` выдаёт `PulseAudio information vanished from X11!`
+    - `pulseaudio -k` говорит, что "нет такой ноты"
+    - `sudo killall pulseaudio` говорит, что "нет такой ноты"
+    - `pulseaudio --check` ни к чему не приводит
+    - `pulseaudio --start` ни к чему не приводит
+    - игры с конфигом пульса, группами и udev правилами ни к чему не приводят
+
+  Причина: у тебя завёлся ***pipewire***!!!
+
+  Решение: Ставь `ubuntustudio-pulseaudio-config`
+  ```
+  grep -e " install " -e " remove " /var/log/dpkg.log | awk '{print $3,$4}'
+  ```
+  ```
+  remove gstreamer1.0-pipewire:amd64
+  remove libpipewire-0.3-common:all
+  remove libpipewire-0.3-dev:amd64
+  remove pipewire-pulse:amd64
+  remove wireplumber:amd64
+  remove pipewire:amd64
+  remove pipewire-bin:amd64
+  remove libpipewire-0.3-modules:amd64
+  remove libwireplumber-0.4-0:amd64
+  install pulseaudio-module-jack:amd64
+  install pulseaudio-module-bluetooth:amd64
+  install a2jmidid:amd64
+  install libzita-alsa-pcmi0t64:amd64
+  install libzita-resampler1:amd64
+  install jackd2:amd64
+  install python3-ply:all
+  install python3-pycparser:all
+  install python3-cffi:all
+  install python3-jack-client:all
+  install zita-ajbridge:amd64
+  install qastools-common:all
+  install qasmixer:amd64
+  install python3-alsaaudio:amd64
+  install polkitd-pkla:amd64
+  install studio-controls:all
+  install ubuntustudio-pulseaudio-config:all
+  install jackd:all
+  install libconfig++9v5:amd64
+  install libxml++2.6-2v5:amd64
+  install libffado2:amd64
+  install jackd2-firewire:amd64
+  install pulsemixer:all
+  install qjackctl:amd64
+  install qmidinet:amd64
+  install zita-njbridge:amd64
+  ```
