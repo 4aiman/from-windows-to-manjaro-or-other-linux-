@@ -620,3 +620,20 @@
   Это какая-то херня с дровами нвидии + Хромом. В других приложениях OpebGL нормально себя ведёт. Переключи Хром на вулкан.
   ![изображение](https://github.com/user-attachments/assets/f735b681-389e-41f9-bc09-c9f32e310915)
 
+- ### Не работает плагин погоды в xfce
+	#### устанавливаем пререквизиты
+	`sudo apt build-dep xfce4-weather-plugin`
+	
+	#### качаем исходники (должно быть включено в источниках)
+	`apt source xfce4-weather-plugin
+	cd xfce4-weather-plugin-0.11.2`
+	
+	#### меняем урл апи с api.met.no на нужный aa062reffgwvo1efa.api.met.no (в 0.11.3 такой же)
+	`sed 's#https://api.met.no#https://aa062reffgwvo1efa.api.met.no#' -i panel-plugin/weather.c
+	EDITOR=true dpkg-source --commit . backport_changed_api_url.patch`
+	
+	#### собираем пакет
+	`dpkg-buildpackage -us -uc -ui`
+
+	#### готовый пакет доступен **на уровень выше**, чем папка, где проделывались манипуляции по сборке
+  	`ddeb` - то отладочный пакет, рядом есть нормальный `deb`
