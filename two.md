@@ -647,4 +647,21 @@
      и пихаем её в файл
   2. Добавляем шорткат
   3. В цитрамоне будет постоянно сбрасываться, говно. Придётся хаходить в настройки и перерегистрировать шорткат. ХЗ почему так.
+
+- ### Nemo перстал открывать скрипты в xfce4-terminal
+
+  ![изображение](https://github.com/user-attachments/assets/0259d5d8-e0e9-41f9-9f6b-5d535933bcf9)
+
+  Прчём, если сделать
+  ```
+  gsettings set org.cinnamon.desktop.default-applications.terminal exec 'xfce4-terminal'
+  ```
+  то или ничего вообще не происходит, или открыввается xterm (он же открывается, если указать TERMINAL)
+
+  Решение:
+  ```
+  gsettings get org.cinnamon.desktop.default-applications.terminal exec
+  gsettings get org.cinnamon.desktop.default-applications.terminal exec-arg
+  ```
+  и теперь всё ок!
   
