@@ -665,3 +665,9 @@
   ```
   и теперь всё ок!
   
+- ### Le Potato fsck
+  
+  1. Set fsck to scan on every boot:
+     ```tune2fs -c 1 /dev/mmcblk0p1```
+  2. Add bellow line to `/boot/armbianEnv.txt`
+     ```extraargs=fsck.mode=force fsck.repair=yes```
