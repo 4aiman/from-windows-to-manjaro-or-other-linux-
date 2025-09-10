@@ -671,3 +671,14 @@
      ```tune2fs -c 1 /dev/mmcblk0p1```
   2. Add bellow line to `/boot/armbianEnv.txt`
      ```extraargs=fsck.mode=force fsck.repair=yes```
+
+- ### Пропали смайлики в xfce
+
+  Как бы странно ни было, решается это через `qt5ct`.<br>
+  Надо выставить в нём `Noto Sans` и нажать `Создать font.conf`
+  <img width="740" height="176" alt="изображение" src="https://github.com/user-attachments/assets/870ae02a-f865-4517-ae04-a9bc8c95811b" />
+
+  После этого смайлы вернутся в xfce4, включая панели, терминал, редакторы, адресную браузера - везде.
+  
+  
+
