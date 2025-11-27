@@ -685,3 +685,25 @@
 
   Из плюсов: рабочий лагин погоды, компактная шапка в Тунаре, дерево папок в детальном посмотре (как в Nemo)<br>
   `sudo add-apt-repository ppa:xubuntu-dev/staging`
+
+
+- ### certbot сгенерировал ключи и сертификаты, но они недоступны из nodejs
+
+	#### отредачить файл судоеров
+	```
+	sudo visudo -f /etc/sudoers.d/chaiman-cert-access
+	```
+
+	Добавить строку
+  	```
+	chaiman ALL=(root) NOPASSWD: /usr/bin/cat /etc/letsencrypt/live/4aiman.top/privkey.pem, /usr/bin/cat /etc/letsencrypt/live/4aiman.top/fullchain.pem
+	```
+
+	Это позволит судоеру `chaiman` читать сертификаты без запроса пароля (но всё ещё через sudo)
+
+	А в nodejs сделать что-то такое:
+	```
+	const { execSync } = require('child_process');
+	const privateKey = execSync('sudo -n cat /etc/letsencrypt/live/4aiman.top/privkey.pem', {encoding: 'utf8'});
+ 	const privateCert = execSync('sudo -n cat /etc/letsencrypt/live/4aiman.top/fullchain.pem', {encoding: 'utf8'});
+	```
